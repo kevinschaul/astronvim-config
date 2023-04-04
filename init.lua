@@ -158,7 +158,8 @@ local config = {
       ["<leader>n"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
     },
     i = {
-      ["jw"] = { "<esc>:w<cr>", desc = "Save" }
+      ["jj"] = { "<esc>", desc = "Exit insert mode" },
+      ["jw"] = { "<esc>:w<cr>", desc = "Save" },
     },
     t = {
       -- setting a mapping to false will disable it
@@ -185,7 +186,7 @@ local config = {
   -- Configure plugins
   plugins = {
     -- You can disable default plugins as follows:
-    -- { "max397574/better-escape.nvim", enabled = false },
+    { "max397574/better-escape.nvim", enabled = false },
     --
     -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
     -- {
