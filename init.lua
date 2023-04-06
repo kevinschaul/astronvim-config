@@ -44,10 +44,10 @@ local config = {
       wrap = true,            -- sets vim.opt.wrap
     },
     g = {
-      mapleader = ",",                 -- sets vim.g.mapleader
+      mapleader = " ",                 -- sets vim.g.mapleader
       autoformat_enabled = false,      -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
       cmp_enabled = true,              -- enable completion at start
-      autopairs_enabled = true,        -- enable autopairs at start
+      autopairs_enabled = false,       -- enable autopairs at start
       diagnostics_mode = 2,            -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
       icons_enabled = true,            -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
       ui_notifications_enabled = true, -- disable notifications when toggling UI elements
@@ -187,17 +187,19 @@ local config = {
   plugins = {
     -- You can disable default plugins as follows:
     { "max397574/better-escape.nvim", enabled = false },
+    { "rafamadriz/friendly-snippets", enabled = false },
     --
     -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-    -- {
-    --   "L3MON4D3/LuaSnip",
-    --   config = function(plugin, opts)
-    --     require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-    --     -- add more custom luasnip configuration such as filetype extend or custom snippets
-    --     local luasnip = require "luasnip"
-    --     luasnip.filetype_extend("javascript", { "javascriptreact" })
-    --   end,
-    -- },
+    {
+      "L3MON4D3/LuaSnip",
+      config = function(plugin, opts)
+        require "plugins.configs.luasnip" (plugin, opts)                                       -- include the default astronvim config that calls the setup call
+        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+        -- -- add more custom luasnip configuration such as filetype extend or custom snippets
+        -- local luasnip = require "luasnip"
+        -- luasnip.filetype_extend("javascript", { "javascriptreact" })
+      end,
+    },
     -- {
     --   "windwp/nvim-autopairs",
     --   config = function(plugin, opts)
@@ -301,7 +303,7 @@ local config = {
     {
       "nvim-treesitter/nvim-treesitter",
       opts = {
-        ensure_installed = { "lua", "javascript" },
+        ensure_installed = { "lua", "javascript", "typescript" },
       },
     },
     -- use mason-lspconfig to configure LSP installations
@@ -326,6 +328,26 @@ local config = {
       opts = {
         -- ensure_installed = { "python" },
       },
+    },
+    {
+      -- override nvim-cmp plugin
+      "hrsh7th/nvim-cmp",
+      -- override the options table that is used in the `require("cmp").setup()` call
+      opts = function(_, opts)
+        -- opts parameter is the default options table
+        -- the function is lazy loaded so cmp is able to be required
+        local cmp = require "cmp"
+        -- modify the sources part of the options table
+        opts.sources = cmp.config.sources {
+          { name = "luasnip",  priority = 1000 },
+          { name = "nvim_lsp", priority = 750 },
+          { name = "buffer",   priority = 500 },
+          { name = "path",     priority = 250 },
+        }
+
+        -- return the new table to be used
+        return opts
+      end,
     },
     -- Add the community repository of plugin specifications
     "AstroNvim/astrocommunity",
