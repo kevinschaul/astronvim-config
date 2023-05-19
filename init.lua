@@ -155,7 +155,19 @@ local config = {
       ["<S-h>"] = { "<cmd>bprevious<cr>", desc = "Previous buffer" },
       ["<leader>e"] = false,
       ["<leader>o"] = false,
-      ["<leader>n"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+
+      -- Disable toggleterm t* keymaps
+      ["<leader>t"] = false,
+      ["<leader>tf"] = false,
+      ["<leader>tl"] = false,
+      ["<leader>tn"] = false,
+      ["<leader>tu"] = false,
+      ["<leader>tt"] = false,
+      ["<leader>tp"] = false,
+      ["<leader>th"] = false,
+      ["<leader>tv"] = false,
+
+      ["<leader>t"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
     },
     i = {
       ["jj"] = { "<esc>", desc = "Exit insert mode" },
@@ -259,17 +271,7 @@ local config = {
       opts = function(_, opts)
         -- customize the dashboard header
         opts.section.header.val = {
-          " █████  ███████ ████████ ██████   ██████",
-          "██   ██ ██         ██    ██   ██ ██    ██",
-          "███████ ███████    ██    ██████  ██    ██",
-          "██   ██      ██    ██    ██   ██ ██    ██",
-          "██   ██ ███████    ██    ██   ██  ██████",
-          " ",
-          "    ███    ██ ██    ██ ██ ███    ███",
-          "    ████   ██ ██    ██ ██ ████  ████",
-          "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-          "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-          "    ██   ████   ████   ██ ██      ██",
+          "AstroNvim"
         }
 
         local button = require("astronvim.utils").alpha_button
@@ -349,6 +351,20 @@ local config = {
         return opts
       end,
     },
+
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      opts = function(_, opts)
+        -- opts parameter is the default options table
+        opts.sources = {
+          "filesystem"
+        }
+        opts.filesystem.follow_current_file = false
+        return opts
+      end,
+    },
+
+
     -- Add the community repository of plugin specifications
     "AstroNvim/astrocommunity",
     -- example of imporing a plugin, comment out to use it or add your own
