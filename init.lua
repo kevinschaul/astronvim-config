@@ -199,7 +199,7 @@ local config = {
   plugins = {
     -- You can disable default plugins as follows:
     { "max397574/better-escape.nvim", enabled = false },
-    { "rafamadriz/friendly-snippets", enabled = false },
+    { "goolord/alpha-nvim", enabled = false },
     --
     -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
     {
@@ -266,25 +266,6 @@ local config = {
     -- },
 
     -- Plugin entries can also be used to override the default options for plugins as well
-    {
-      "goolord/alpha-nvim",
-      opts = function(_, opts)
-        -- customize the dashboard header
-        opts.section.header.val = {
-          "AstroNvim"
-        }
-
-        local button = require("astronvim.utils").alpha_button
-        opts.section.buttons.val = {
-          button("LDR f f", "  Find File  "),
-          button("LDR f o", "  Recents  "),
-          button("LDR f w", "  Find Word  "),
-          button("LDR f '", "  Bookmarks  "),
-          button("LDR S l", "  Last Session  "),
-        }
-        return opts
-      end,
-    },
     {
       "jose-elias-alvarez/null-ls.nvim",
       opts = function(_, config)
