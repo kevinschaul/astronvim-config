@@ -70,6 +70,12 @@ local config = {
   },
   -- Extend LSP configuration
   lsp = {
+    setup_handlers = {
+      rust_analyzer = function(_, opts) require("rust-tools").setup {
+        server = opts
+      } end
+    },
+
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
@@ -294,7 +300,7 @@ local config = {
       "williamboman/mason-lspconfig.nvim",
       -- overrides `require("mason-lspconfig").setup(...)`
       opts = {
-        -- ensure_installed = { "lua_ls" },
+        ensure_installed = { "rust_analyzer" },
       },
     },
     -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
@@ -345,6 +351,15 @@ local config = {
       end,
     },
 
+    { "simrat39/rust-tools.nvim" },
+
+    {
+      "David-Kunz/gen.nvim",
+      cmd = "Gen",
+      opts = {
+        model = "codellama"
+      }
+    },
 
     -- Add the community repository of plugin specifications
     "AstroNvim/astrocommunity",
