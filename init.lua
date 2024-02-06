@@ -397,6 +397,14 @@ local config = {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    -- auto-reload files when modified externally
+    -- https://unix.stackexchange.com/a/383044
+    -- https://github.com/AstroNvim/AstroNvim/issues/1534
+    vim.o.autoread = true
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+      command = "if mode() != 'c' | checktime | endif",
+      pattern = { "*" },
+    })
   end,
 }
 
