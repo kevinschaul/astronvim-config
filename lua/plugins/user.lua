@@ -6,6 +6,12 @@ return {
 
   -- == Examples of Adding Plugins ==
 
+  { "nvim-lua/plenary.nvim" },
+
+  { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
+
+  { dir = "~/dev/css2cssinjs.nvim", opts = {} },
+
   -- "andweeb/presence.nvim",
   -- {
   --   "ray-x/lsp_signature.nvim",
@@ -29,15 +35,39 @@ return {
   -- { "max397574/better-escape.nvim", enabled = false },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   config = function(plugin, opts)
-  --     require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom luasnip configuration such as filetype extend or custom snippets
-  --     local luasnip = require "luasnip"
-  --     luasnip.filetype_extend("javascript", { "javascriptreact" })
-  --   end,
-  -- },
+  {
+    "L3MON4D3/LuaSnip",
+    config = function(plugin, opts)
+      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+      -- add more custom luasnip configuration such as filetype extend or custom snippets
+      local luasnip = require "luasnip"
+      luasnip.filetype_extend("typescript", { "javascript" })
+    end,
+  },
+
+  {
+    "rebelot/heirline.nvim",
+    config = function(plugin, opts)
+      local status = require "astroui.status"
+      opts.statusline = { -- statusline
+        hl = { fg = "fg", bg = "bg" },
+        -- status.component.mode(),
+        -- status.component.git_branch(),
+        status.component.file_info { filename = { modify = ":." }, filetype = false },
+        status.component.git_diff(),
+        status.component.diagnostics(),
+        status.component.fill(),
+        status.component.cmd_info(),
+        status.component.fill(),
+        status.component.lsp(),
+        -- status.component.virtual_env(),
+        status.component.treesitter(),
+        status.component.nav(),
+        -- status.component.mode { surround = { separator = "right" } },
+      }
+      require "astronvim.plugins.configs.heirline"(plugin, opts)
+    end,
+  },
 
   -- {
   --   "windwp/nvim-autopairs",
