@@ -7,8 +7,8 @@ vim.filetype.add {
   -- extension = {
   --   foo = "fooscript",
   -- },
-  filename = {
-    ["justfile"] = "just",
+  filetype = {
+    ["justfile"] = "Makefile",
   },
   -- pattern = {
   --   ["~/%.config/foo/.*"] = "fooscript",

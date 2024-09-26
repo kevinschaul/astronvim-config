@@ -10,7 +10,7 @@ return {
 
   { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
-  { dir = "~/dev/css2cssinjs.nvim", opts = {} },
+  -- { dir = "~/dev/css2cssinjs.nvim", opts = {} },
 
   -- "andweeb/presence.nvim",
   -- {
@@ -98,4 +98,11 @@ return {
   --     )
   --   end,
   -- },
+  {
+    "jmbuhr/otter.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {},
+  },
 }
