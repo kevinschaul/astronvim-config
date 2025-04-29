@@ -30,6 +30,7 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to auto
         wrap = true, -- sets vim.opt.wrap
+        scrolloff = 8,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -62,6 +63,11 @@ return {
         ["<Leader>b"] = { desc = "Buffers" },
         -- quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+
+        ["<Leader>fj"] = {
+          function() require("telescope").extensions.jump_start.find() end,
+          desc = "Find jump-starter",
+        },
 
         [";"] = { ":" },
       },

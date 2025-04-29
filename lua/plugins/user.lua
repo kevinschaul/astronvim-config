@@ -10,6 +10,8 @@ return {
 
   { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
 
+  { dir = "~/dev/jump-start-tools/nvim" },
+
   -- { dir = "~/dev/css2cssinjs.nvim", opts = {} },
 
   -- "andweeb/presence.nvim",
@@ -42,6 +44,7 @@ return {
       -- add more custom luasnip configuration such as filetype extend or custom snippets
       local luasnip = require "luasnip"
       luasnip.filetype_extend("typescript", { "javascript" })
+      luasnip.filetype_extend("typescriptreact", { "javascript" })
     end,
   },
 
