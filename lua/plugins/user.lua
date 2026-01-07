@@ -7,11 +7,23 @@ return {
 
   {
     "folke/snacks.nvim",
-    opts = function(_, opts)
-      opts.dashboard = opts.dashboard or {}
-      opts.dashboard.preset = opts.dashboard.preset or {}
-      opts.dashboard.preset.header = "yo"
-    end,
+    opts = {
+      dashboard = {
+        width = 40,
+        preset = {
+          header = "yo",
+        },
+      },
+      image = { enabled = false },
+      picker = {
+        formatters = {
+          file = {
+            filename_first = true,
+            truncate = 80,
+          },
+        },
+      },
+    },
   },
 
   {
