@@ -30,7 +30,6 @@ return {
       },
       filename = {
         [".foorc"] = "fooscript",
-        ["justfile"] = "Makefile",
       },
       pattern = {
         [".*/etc/foo/.*"] = "fooscript",
